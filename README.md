@@ -145,3 +145,9 @@ The Asio documentation, especially the [ICMP ping example](http://think-async.co
 [This PDF document](http://boost.cowic.de/rc/pdf/asio_doc.pdf) written by the creator of Asio has even more information about how Asio/Boost.Asio works. There's an especially great table on page 19 that compares the BSD socket API to Asio.
 
 Also thanks to Paul Gurniak for helping me understand how C++ template classes work.
+
+License
+-------
+Copyright (c) 2012 Kevin D. Conley (kcon at stanford dot edu)
+
+Distributed under the Boost Software License, Version 1.0. (See accompanying file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
