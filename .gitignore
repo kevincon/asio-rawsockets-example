@@ -10,3 +10,10 @@
 *.lai
 *.la
 *.a
+
+# Boost/Asio libraries
+asio-1.4.8
+boost_1_50_0
+
+# Compiled program
+example
