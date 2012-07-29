@@ -37,12 +37,14 @@ Before this example will compile, you must first download the following librarie
 
 So right before you compile, your repository folder should look like this:
 
-boost_1_50_0/
-asio-1.4.8/
-example.cpp
-raw.hpp
-Makefile
-README.md
+* boost_1_50_0/
+* asio-1.4.8/
+* example.cpp
+* udp_header.hpp
+* raw.hpp
+* Makefile
+* README.md
+* LICENSE_1_0.txt
 
 Compilation
 -----------
