@@ -111,9 +111,9 @@ I use 127.0.0.1 (localhost) for testing.
 
 Then we create the endpoint object using the bytes_type object:
 	
-	asio::ip::raw::endpoint ep(asio::ip::address_v4(b), 24);
+	asio::ip::raw::endpoint ep(asio::ip::address_v4(b), 23);
 
-The 24 here is the destination port (telnet).
+The 23 here is the destination port (telnet).
 
 Finally, we open the socket:
 
