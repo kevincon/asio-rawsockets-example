@@ -18,6 +18,8 @@ You __CAN__:
 You __CANNOT__:
 * Inject packets with a custom Ethernet or IP header into the network.
 
+__UPDATE__: It turns out that as of Asio 1.10.0 / Boost 1.54, you can now transmit packets with a custom Ethernet header using the new generic::raw_protocol class. (thanks, Tomas!)
+
 When I first tried using the basic_raw_socket class, I was attempting to inject packets into the network because for my work at NASA we needed to be able to send [AFDX packets](http://en.wikipedia.org/wiki/Avionics_Full-Duplex_Switched_Ethernet) over an Ethernet interface. 
 
 I chose the Asio library for this because it's cross-platform, and unlike Boost.Asio it does not require linking with any libraries. Unfortunately, I discovered you cannot inject network packets using Asio or Boost.Asio. I haven't tried it yet, but another library that might allow you to inject network packets while remaining cross-platform is [libpnet6](http://pnet6.sourceforge.net/).
