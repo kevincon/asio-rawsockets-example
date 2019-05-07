@@ -15,15 +15,15 @@
 # pragma once
 #endif // defined(_MSC_VER) && (_MSC_VER >= 1200)
 
-#include <asio/detail/config.hpp>
-#include <asio/detail/socket_types.hpp>
-#include <asio/basic_raw_socket.hpp>
-#include <asio/ip/basic_endpoint.hpp>
-#include <asio/ip/basic_resolver.hpp>
-#include <asio/ip/basic_resolver_iterator.hpp>
-#include <asio/ip/basic_resolver_query.hpp>
+#include <boost/asio/detail/config.hpp>
+#include <boost/asio/detail/socket_types.hpp>
+#include <boost/asio/basic_raw_socket.hpp>
+#include <boost/asio/ip/basic_endpoint.hpp>
+#include <boost/asio/ip/basic_resolver.hpp>
+#include <boost/asio/ip/basic_resolver_iterator.hpp>
+#include <boost/asio/ip/basic_resolver_query.hpp>
 
-#include <asio/detail/push_options.hpp>
+#include <boost/asio/detail/push_options.hpp>
 
 namespace asio {
 namespace ip {
@@ -32,7 +32,7 @@ class raw
 {
 public:
   /// The type of a RAW endpoint.
-  typedef basic_endpoint<raw> endpoint;
+  typedef boost::asio::ip::basic_endpoint<raw> endpoint;
 
   /// Construct to represent the IPv4 RAW protocol.
   static raw v4()
@@ -72,10 +72,10 @@ public:
   }
 
   /// The RAW socket type.
-  typedef basic_raw_socket<raw> socket;
+  typedef boost::asio::basic_raw_socket<raw> socket;
 
   /// The RAW resolver type.
-  typedef basic_resolver<raw> resolver;
+  typedef boost::asio::ip::basic_resolver<raw> resolver;
 
   /// Compare two protocols for equality.
   friend bool operator==(const raw& p1, const raw& p2)
@@ -103,6 +103,5 @@ private:
 } // namespace ip
 } // namespace asio
 
-#include <asio/detail/pop_options.hpp>
 
 #endif // RAW_HPP
