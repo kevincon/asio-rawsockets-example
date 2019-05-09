@@ -53,11 +53,18 @@ Compilation
 
 To compile the example, just type:
 
-	make
+```bash
+mkdir -p build
+cd build
+cmake ..
+make
+```
 
 And to run the example, type:
 
-	sudo ./example
+```
+sudo ./example
+```
 
 The reason we have to use sudo (and therefore enter our user password) is because the SOCK_RAW protocol type requires root privileges.
 
