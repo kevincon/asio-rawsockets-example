@@ -5,7 +5,6 @@ add_compile_options(-std=c++11)
 
 find_package(Boost REQUIRED system)
 
-INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIR})
 
 add_executable(example
     ${CMAKE_CURRENT_SOURCE_DIR}/src/example.cpp
