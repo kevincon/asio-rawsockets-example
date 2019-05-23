@@ -12,5 +12,5 @@ add_executable(example
     ${CMAKE_CURRENT_SOURCE_DIR}/src/example.cpp
 )
 
-target_link_libraries(example LINK_PUBLIC ${Boost_LIBRARIES}     
+target_link_libraries(example PUBLIC ${Boost_LIBRARIES}     
 )
