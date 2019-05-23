@@ -11,6 +11,7 @@ INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIR})
 add_executable(example
     ${CMAKE_CURRENT_SOURCE_DIR}/src/example.cpp
 )
-
+target_include_directories(example PUBLIC ${Boost_INCLUDE_DIR}
+)
 target_link_libraries(example PUBLIC ${Boost_LIBRARIES}     
 )
