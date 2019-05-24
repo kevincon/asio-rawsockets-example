@@ -16,7 +16,7 @@
 #include <stdio.h>
 #include <exception>
 
-#include <asio.hpp>
+#include <boost/asio.hpp>
 
 #include "udp_header.hpp"
 #include "raw.hpp"
@@ -32,17 +32,17 @@ int main() {
 
 	std::string body("---"); //create a small data payload
 
-	asio::io_service io_service;
+    boost::asio::io_service io_service;
 
-	asio::basic_raw_socket<asio::ip::raw> socket_(io_service);
+    boost::asio::basic_raw_socket<asio::ip::raw> socket_(io_service);
 
-	asio::streambuf request_buffer;
+    boost::asio::streambuf request_buffer;
 	std::ostream os(&request_buffer);
 	os << udph << body;
 
-	asio::ip::address_v4::bytes_type b = {{127, 0, 0, 1}};
+    boost::asio::ip::address_v4::bytes_type b = {{127, 0, 0, 1}};
 
-	asio::ip::raw::endpoint ep(asio::ip::address_v4(b), 23);
+    asio::ip::raw::endpoint ep(boost::asio::ip::address_v4(b), 23);
 
 	try {
 		socket_.open();

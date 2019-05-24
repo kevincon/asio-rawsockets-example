@@ -1,9 +1,7 @@
-Asio/Boost.Asio Raw Sockets Example
+Boost.Asio Raw Sockets Example
 =======================
 
-This is a simple demonstration of using Asio's basic_raw_socket template class to transmit packets with a custom transport layer header. In this example I have created a udp_header class for holding the contents of a UDP header, and I use the basic_raw_socket class to send UDP packets with the custom header.
-
-This example should also work for Boost.Asio, but you'll have to change the namespaces from "asio" to "boost::asio" and the include files from "asio/FILE.hpp" to "boost/asio/FILE.hpp".
+This is a simple demonstration of using Boost.Asio's basic_raw_socket template class to transmit packets with a custom transport layer header. In this example I have created a udp_header class for holding the contents of a UDP header, and I use the basic_raw_socket class to send UDP packets with the custom header.
 
 Clarification
 -------------
@@ -18,46 +16,44 @@ You __CAN__:
 You __CANNOT__:
 * Inject packets with a custom Ethernet or IP header into the network.
 
-__UPDATE__: It turns out that as of Asio 1.10.0 / Boost 1.54, you can now transmit packets with a custom Ethernet header using the new generic::raw_protocol class. (thanks, Tomas!)
+__UPDATE__: It turns out that as of Boost 1.54, you can now transmit packets with a custom Ethernet header using the new generic::raw_protocol class. (thanks, Tomas!)
 
 When I first tried using the basic_raw_socket class, I was attempting to inject packets into the network because for my work at NASA we needed to be able to send [AFDX packets](http://en.wikipedia.org/wiki/Avionics_Full-Duplex_Switched_Ethernet) over an Ethernet interface. 
 
-I chose the Asio library for this because it's cross-platform, and unlike Boost.Asio it does not require linking with any libraries. Unfortunately, I discovered you cannot inject network packets using Asio or Boost.Asio. I haven't tried it yet, but another library that might allow you to inject network packets while remaining cross-platform is [libpnet6](http://pnet6.sourceforge.net/).
+Unfortunately, I discovered you cannot inject network packets using Boost.Asio. I haven't tried it yet, but another library that might allow you to inject network packets while remaining cross-platform is [libpnet6](http://pnet6.sourceforge.net/).
 
 Warning
 -------
 
-I'm still very much a beginner to network programming, and this is really the first time I've programmed in C++, let alone the Boost/Asio library, so please excuse any bad programming styles I've used or any mistakes I've made. If you find a mistake or have a suggestion for improving this example, please submit an issue or pull request and I'll be glad to use your feedback to make it better. 
+I'm still very much a beginner to network programming, and this is really the first time I've programmed in C++, let alone the Boost.Asio library, so please excuse any bad programming styles I've used or any mistakes I've made. If you find a mistake or have a suggestion for improving this example, please submit an issue or pull request and I'll be glad to use your feedback to make it better. 
 
 Dependencies
 ------------
 
-Before this example will compile, you must first download the following libraries and extract them to the same folder as this repository:
+Before this example will compile, you must first install
 
-* [Boost 1.5.0](http://www.boost.org/)
-* [Asio 1.4.8](http://think-async.com/)
-
-So right before you compile, your repository folder should look like this:
-
-* boost_1_50_0/
-* asio-1.4.8/
-* example.cpp
-* udp_header.hpp
-* raw.hpp
-* Makefile
-* README.md
-* LICENSE_1_0.txt
+* The [CMake build tool](https://cmake.org)
+  * On Ubuntu you can do this via `sudo apt-get install cmake`.
+* The [Boost library with Boost.System](https://www.boost.org)
+  * On Ubuntu you can do this via `sudo apt-get install libboost-dev libboost-system-dev`.
 
 Compilation
 -----------
 
 To compile the example, just type:
 
-	make
+```bash
+mkdir -p build
+cd build
+cmake ..
+make
+```
 
 And to run the example, type:
 
-	sudo ./example
+```
+sudo ./example
+```
 
 The reason we have to use sudo (and therefore enter our user password) is because the SOCK_RAW protocol type requires root privileges.
 
@@ -85,17 +81,17 @@ We then create a small data payload for our packet, a simple string "---":
 
 We create an asio io_service object:
 
-	asio::io_service io_service;
+	boost::asio::io_service io_service;
 
 We then create our basic_raw_socket object, passing in the "raw" class defined in raw.hpp:
 
-	asio::basic_raw_socket<asio::ip::raw> socket_(io_service);
+	boost::asio::basic_raw_socket<asio::ip::raw> socket_(io_service);
 
 The raw class defines the protocol type and family for the basic_raw_socket to use. It's set to use SOCK_RAW for the protocol type, IPPPROTO_UDP for the protocol, and PF_INET/PF_INET6 depending on whether you use IPv4 or IPv6. By setting the protocol to be IPPPROTO_UDP, the appropriate Byte in the IP header will be set, so our custom UDP header will be recognized by the network.
 
-We then create an asio::streambuf object:
+We then create an boost::asio::streambuf object:
 
-	asio::streambuf request_buffer;
+	boost::asio::streambuf request_buffer;
 
 And we use it to create an output stream:
 
@@ -105,15 +101,15 @@ Now we can put our custom header and the data payload into the output stream:
 
 	os << udph << body;
 
-Then we define the destination endpoint for our packet as an asio::ip::address_v4::bytes_type object:
+Then we define the destination endpoint for our packet as a boost::asio::ip::address_v4::bytes_type object:
 
-	asio::ip::address_v4::bytes_type b = {{127, 0, 0, 1}};
+	boost::asio::ip::address_v4::bytes_type b = {{127, 0, 0, 1}};
 
 I use 127.0.0.1 (localhost) for testing.
 
 Then we create the endpoint object using the bytes_type object:
 	
-	asio::ip::raw::endpoint ep(asio::ip::address_v4(b), 23);
+	asio::ip::raw::endpoint ep(boost::asio::ip::address_v4(b), 23);
 
 The 23 here is the destination port (telnet).
 
